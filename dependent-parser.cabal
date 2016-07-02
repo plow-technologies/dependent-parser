@@ -18,46 +18,13 @@ Library
                         Data.Parser.Dependent.Internal
 --  Other-Modules:        
   Build-Depends:        base >= 4 && < 5
+                      , text >= 1.2.2.1
 -- Test Suite Code
-                      , lens
+                      , parsers
                       , regex-genex
-                      , tasty                      
-                      , tasty-golden
-                      , tasty-hunit
-                      , tasty-quickcheck
-                      , QuickCheck
+                      , attoparsec
+                      , contravariant
 
-executable dependent-parser
-  Default-Language:     Haskell2010
-  HS-Source-Dirs:       src
-  GHC-Options:          -Wall
-  main-is:              Main.hs
-  Build-Depends:        base >= 4 && < 5
-                      , dependent-parser
--- Test Suite Code
-                      , lens
-                      , regex-genex
-                      , tasty                      
-                      , tasty-golden
-                      , tasty-hunit
-                      , tasty-quickcheck
-                      , QuickCheck
-
-Test-Suite spec
-  Type:                 exitcode-stdio-1.0
-  Default-Language:     Haskell2010
-  Hs-Source-Dirs:       src
-                      , test
-  Ghc-Options:          -Wall
-  Main-Is:              Spec.hs
-  Build-Depends:        base
-                      , regex-genex
-                      , tasty                      
-                      , tasty-golden
-                      , tasty-hunit
-                      , tasty-quickcheck
-                      , QuickCheck
-                      
 
 Source-Repository head
   Type:                 git

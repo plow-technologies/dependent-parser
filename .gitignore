@@ -46,3 +46,7 @@ tramp
 
 # Yesod 
 yesod-devel/
+/.stack-work/install/x86_64-linux/lts-6.5/7.10.3/bin/dependent-parser
+./stack-work
+.stack-work
+/TAGS
