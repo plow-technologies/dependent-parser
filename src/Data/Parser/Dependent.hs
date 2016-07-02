@@ -200,12 +200,12 @@ exampleTwo = contraParseOnly RequestInt contraParseAddressResponse "a,3"
 
 
 parseListOfAddressResponses :: [Request] -> Parser [AddressResponse]
-parseListOfAddressResponses requests = sequence $ List.foldl' decodeOneResponse [] requests
+parseListOfAddressResponses requests = sequence $ List.foldr decodeOneResponse [] requests
    where
      seperator = (char '|' *> pure ()) <|> eof
-     decodeOneResponse lst req = let p =  (getParser contraParseAddressResponse req)
-                                 in  (p <* seperator):lst
-                                 
+     decodeOneResponse req lst = let p =  (getParser contraParseAddressResponse req)
+                                     in  (p <* seperator):lst
+
 
 
 multiAddressContraParser :: ContraParser [AddressResponse] [Request]
@@ -218,3 +218,25 @@ exampleThree = contraParseOnly [RequestInt,RequestInteger,RequestInt] multiAddre
 
 
 
+--------------------------------------------------
+-- Non top level sources
+--------------------------------------------------
+
+data AddressRequestFullMessage = AddressRequestFullMessage {
+   requestName :: Text,
+   requestArray :: [Request]
+              }
+
+exampleAddressRequestFullMessage :: AddressRequestFullMessage
+exampleAddressRequestFullMessage = AddressRequestFullMessage
+                                         "all pins"
+                                         [RequestInt
+                                         ,RequestInteger
+                                         ,RequestInteger]
+
+
+fullMessageResponse  :: ContraParser [AddressResponse] AddressRequestFullMessage
+fullMessageResponse = contramap requestArray multiAddressContraParser                                         
+
+exampleFour :: Either String [AddressResponse]
+exampleFour = contraParseOnly exampleAddressRequestFullMessage fullMessageResponse "a,3|a,2|c,4"
