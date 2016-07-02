@@ -1,21 +1,12 @@
 # dependent-parser
 
-TODO: Write description here
+A reference implementation of a
+Contravariant Parser, with examples.
 
 ## Installation
 
-TODO: Write installation instructions here
+``` stack build```
 
-## Usage
-
-TODO: Write usage instructions here
-
-## How to run tests
-
-```
-cabal configure --enable-tests && cabal build && cabal test
-```
-
-## Contributing
-
-TODO: Write contribution instructions here
+## Further Reading
+* [Plowtech Blog, Contravariant Parsers]()
+* [School of haskell, Contravariant Functors](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/profunctors#contravariant-functors)
