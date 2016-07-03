@@ -42,10 +42,10 @@ import qualified Data.List as List
 --------------------------------------------------
 
 -- | ContraParser, for parsing dependent uniquely on input
-data ContraParser b a where
-   ContraParser :: { getParser :: a ->  Parser b  } ->  ContraParser b a
+data ContraParser final initial where
+   ContraParser :: { getParser :: initial ->  Parser final  } ->  ContraParser final initial
 
-instance Contravariant (ContraParser b) where
+instance Contravariant (ContraParser final) where
   contramap g (ContraParser p) = ContraParser (p <$> g)
 
 
